@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Prototype Aframe</title>
+  <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-animation-component@3.2.5/dist/aframe-animation-component.min.js"></script>
+  <script src="https://unpkg.com/aframe-randomizer-components@3.0.2/dist/aframe-randomizer-components.min.js"></script>
+  <script src="https://unpkg.com/aframe-entity-generator-component@3.0.1/dist/aframe-entity-generator-component.min.js"></script>
+  <script src="https://unpkg.com/aframe-extras@5.0.1/dist/aframe-extras.min.js"></script>
+</head>
+
+<body>
+  <a-scene stats>
+    <a-assets>
+      <a-mixin id='red' material='color:red'></a-mixin>
+      <a-mixin id="cube" geometry="primitive: box" random-position></a-mixin>
+      <!-- models from https://sketchfab.com/models/fd528056ad154e62a7b2500337fecc34 -->
+      <a-asset-item id='avartar' src='assets/avartar/scene.gltf'></a-asset-item>
+      <!-- <a-asset-item id='blackdragon' src='assets/blackdragon/source/dragon.fbx'></a-asset-item> -->
+      <a-asset-item id='blackhole' src='assets/blackhole/scene.gltf'></a-asset-item>
+
+      <a-mixin id='model' gltf-model='#avartar' 
+              animation-mixer='clip: mixamo.com;'
+              scale='0.05 0.05 0.05'
+              random-position='min:-10 -2 -10; max:10 10 5'
+              random-rotation></a-mixin> 
+
+      <a-mixin id='blackholes' gltf-model='#blackhole'
+                random-position='min:-10 -5 -20;max:10 10 0' scale='0.01 0.01 0.01' random-rotation>
+        
+      </a-mixin>
+
+    </a-assets>
+  <a-sky color='#808080'></a-sky>
+    <!-- <a-entity entity-generator='mixin:red cube;num:50'></a-entity> -->
+    
+    <a-entity entity-generator='mixin:blackholes;num:10;'></a-entity>
+    <!-- <a-entity entity-generator='mixin:model;num:50'></a-entity> -->
+
+    <!-- <a-entity gltf-model='#avartar' 
+              animation-mixer='clip: mixamo.com;'
+              position='-2 0 -5' 
+              scale='0.05 0.05 0.05'>  -->               
+    <!-- </a-entity> -->
+  <!--   <a-entity position='0 0 -2' 
+              scale='0.05 0.05 0.05'
+              fbx-model='src:url(assets/blackdragon/dragon.fbx)'>
+    </a-entity> -->
+   <!--  <a-entity gltf-model='#blackhole'
+              position='0 -0.1 -10' 
+              scale='0.05 0.05 0.05'> -->
+    <!-- </a-entity> -->
+   <!--  <a-entity id="ocean" ocean="density: 20; width: 50; depth: 100; speed: 3"
+                material="color: #ec913e; opacity: 0.75; metalness: 0; roughness: 0.2"
+                rotation="-90 0 0">              
+    </a-entity> -->
+  </a-scene>
+</body>
+
+</html>
