@@ -63,21 +63,29 @@ window.onload = function() {
   var gui = new dat.GUI();
   var controller = gui.add(modelController, 'number', 0, 100);
 
-  controller.onChange(function(value) {
+  controller.onChange(function(v) {
     let numOfChildren = $('#generator').children().length;
-    console.log(numOfChildren, Math.floor(value))
-    //FILO
-    //TBD:
-    if (value > numOfChildren) { //Add after the end
-      var element='<a-entity mixin="model" gltf-model="" animation-mixer="" scale="" position="" random-position="" rotation="" random-rotation=""></a-entity>'
-      // var entityEl = document.createElement('a-entity');
+    let value = Math.floor(v)
+    console.log(numOfChildren, value)
+
+    if (numOfChildren < value) { //Add after the end
+      var generatorEl = document.querySelector('a-entity#generator');
+      
       for (let i=0;i<value-numOfChildren;i+=1){
-        $('#generator').append(element);
+        //the entity to be attached needs to be created everytime.
+        //Otherwise appendChild just moves the one to the new position.
+        var entityEl = document.createElement('a-entity')
+        entityEl.setAttribute('mixin', 'model')
+        generatorEl.appendChild(entityEl);
       }
 
-    } else if (value < numOfChildren) { //Remove from index 0
+    } else if (numOfChildren>value) { //Remove from index 0
       $('#generator').children().slice(0, numOfChildren-Math.floor(value) ).remove()
     }
+
+    numOfChildren = $('#generator').children().length;
+    console.log('numOfChildren', numOfChildren)
+
   })
 }
 </script>
