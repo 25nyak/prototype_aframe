@@ -1,0 +1,62 @@
+<head>
+  <title>Sprite+Gif</title>
+  <!-- <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script> -->
+  <!-- <script src="js/aframe-spritesheet-component.js"></script> -->
+  <script src="js/build.js"></script>
+  <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
+  <script src="https://rawgit.com/mayognaise/aframe-gif-component/master/dist/aframe-gif-component.min.js"></script>
+  <script src="https://cdn.rawgit.com/tizzle/aframe-sprite-component/master/dist/aframe-sprite-component.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="common.css">
+  <link rel="stylesheet" type="text/css" href="sprite.css">
+</head>
+
+<body>
+  <a-scene>
+    <a-assets>
+      <a-style src="basic.mss"></a-style>
+      <img id="hotspotimage" src="hotspot.png">
+      <img id="pusheenimage" src="pusheen.gif">
+
+    </a-assets>
+      <!-- <a-camera id="camera"></a-camera> -->
+      <a-sprite position="0 0 -5" resize="1 1 1" src="hotspot.png"></a-sprite>
+      <a-entity position="-2 2 -5" id="pusheen" geometry="primitive:circle;" material="shader:gif;src:url(pusheen.gif);" gif=""></a-entity>
+      <a-image position="2 2 -5" src="spritestrip.png" sprite-sheet="cols:6; rows: 1; progress: 0;"></a-image>
+      <a-sky color="pink"></a-sky>
+  </a-scene>
+  <!-- <div class="box"></div> -->
+  <div class="buttons">
+    <a href="javascript:toggleGifPlayback('pusheen')">toggle gif playback<br/>(pusheen in circle)</a>
+  </div>
+  <div class="buttons">
+    <a href="javascript:toggleSprite()">toggle sprite playback<br/>(pusheen in circle)</a>
+  </div>
+  <script>
+  function toggleGifPlayback(id) {
+    document.getElementById(id).components.gif.togglePlayback()
+  }
+  </script>
+  <script type="text/javascript">
+  var animation = { progress: 0 };
+  var tween = new TWEEN.Tween(animation)
+    .to({ progress: 1 }, 1000)
+    .onUpdate(function() {
+      document.querySelector('a-image').setAttribute('sprite-sheet', 'progress', animation.progress);
+    });
+  tween.onComplete(function() { animation.progress = 0; });
+  tween.chain(tween);
+  tween.start();
+
+  var running = true;
+
+  function toggleSprite() {
+    if (running) {
+      tween.stop();
+      running = false;
+    } else {
+      tween.start();
+      running = true
+    }
+  }
+  </script>
+</body>

@@ -1,0 +1,22 @@
+<head>
+  <title>A-Frame using a Sprite</title>
+  <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+  <script src="https://cdn.rawgit.com/tizzle/aframe-sprite-component/master/dist/aframe-sprite-component.min.js"></script>
+</head>
+
+<body>
+
+    <a-scene>
+        <a-assets>
+            <img id="hotspotimage" src="hotspot.png">
+        </a-assets>
+
+        <!-- <a-entity camera position="0 0 5"></a-entity> -->
+
+        <a-sprite position="0 0 -5" resize="1 1 1" src="hotspot.png"></a-sprite>
+
+        <a-sky color="#AADDF0"></a-sky>
+
+    </a-scene>
+
+</body>
