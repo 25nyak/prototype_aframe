@@ -19,17 +19,26 @@
 
     </a-assets>
       <!-- <a-camera id="camera"></a-camera> -->
-      <a-sprite position="0 0 -5" resize="1 1 1" src="hotspot.png"></a-sprite>
-      <a-entity position="-2 2 -5" id="pusheen" geometry="primitive:circle;" material="shader:gif;src:url(pusheen.gif);" gif=""></a-entity>
-      <a-image position="2 2 -5" src="spritestrip.png" sprite-sheet="cols:6; rows: 1; progress: 0;"></a-image>
-      <a-sky color="pink"></a-sky>
+      <a-entity position="-2 2 -5">
+        <a-text value="gif" color="black" position="0 1 0"></a-text>
+        <a-entity id="pusheen" geometry="primitive:circle;" material="shader:gif;src:url(pusheen.gif);" gif=""></a-entity>
+      </a-entity>
+      <a-entity position="0 2 -5">
+        <a-text value="sprite" color="black" position="0 1 0"></a-text>
+        <a-sprite resize="1 1 1" src="hotspot.png"></a-sprite>
+      </a-entity>
+      <a-entity position="2 2 -5">
+        <a-text value="spritesheet" color="black" position="0 1 0"></a-text>
+        <a-image src="spritestrip.png" sprite-sheet="cols:6; rows: 1; progress: 0;"></a-image>
+        <a-sky color="pink"></a-sky>
+      </a-entity>
   </a-scene>
   <!-- <div class="box"></div> -->
   <div class="buttons">
     <a href="javascript:toggleGifPlayback('pusheen')">toggle gif playback<br/>(pusheen in circle)</a>
   </div>
   <div class="buttons">
-    <a href="javascript:toggleSprite()">toggle sprite playback<br/>(pusheen in circle)</a>
+    <a href="javascript:toggleSprite()">toggle sprite playback<br/>(character running)</a>
   </div>
   <script>
   function toggleGifPlayback(id) {
